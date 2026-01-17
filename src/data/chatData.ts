@@ -6,6 +6,7 @@ export interface Message {
   link?: { url: string; label: string };
   timestamp: string;
   status: 'sent' | 'delivered' | 'read';
+  shown?: boolean;
 }
 
 export const chatData: Record<string, Message[]> = {

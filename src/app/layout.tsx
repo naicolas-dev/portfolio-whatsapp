@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import SmoothScrolling from "@/components/SmoothScrolling";
 
 export const metadata: Metadata = {
   title: "Nicolas | Full Stack Developer",
@@ -14,10 +13,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className="bg-wa-light-bg dark:bg-wa-dark-bg text-wa-primary dark:text-[#e9edef] overflow-hidden h-screen w-screen">
-        <SmoothScrolling>
-            {children}
-        </SmoothScrolling>
+      <body className="bg-wa-light-bg dark:bg-wa-dark-bg text-wa-primary dark:text-[#e9edef] overflow-hidden h-screen w-full">
+        {children}
       </body>
     </html>
   );

@@ -2,9 +2,14 @@
 
 import { ReactLenis } from "lenis/react";
 
-export default function SmoothScrolling({ children }: { children: React.ReactNode }) {
+interface SmoothScrollingProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
+export default function SmoothScrolling({ children, className }: SmoothScrollingProps) {
   return (
-    <ReactLenis root options={{ lerp: 0.1, duration: 1.5, smoothWheel: true }}>
+    <ReactLenis root={false} className={className} options={{ lerp: 0.1, duration: 1.5, smoothWheel: true }}>
       {children}
     </ReactLenis>
   );

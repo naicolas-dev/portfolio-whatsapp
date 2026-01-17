@@ -52,11 +52,11 @@ export default function MessageBubble({ message, index }: MessageBubbleProps) {
       onMouseLeave={handleMouseLeave}
       style={{ x: mouseX, y: mouseY }}
 
-      initial={{ opacity: 0, y: 40, scale: 0.95, filter: "blur(5px)" }}
+      initial={{ opacity: 0, y: 20, scale: 0.95, filter: "blur(5px)" }}
       animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
       transition={{ 
-        duration: 0.8,
-        delay: index * 0.1,
+        duration: isVisitor ? 0.3 : 0.4,
+        delay: 0, 
         ease: [0.25, 1, 0.5, 1]
       }}
       

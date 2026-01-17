@@ -4,14 +4,13 @@ import { useChatStore } from "@/store/useChatStore";
 import Sidebar from "@/components/Sidebar";
 import AppNavigation from "@/components/AppNavigation";
 import ChatWindow from "@/components/ChatWindow";
-import ConceptScreen from "@/components/ConceptScreen"; // Importe o novo componente
+import ConceptScreen from "@/components/ConceptScreen";
 import { useEffect, useState } from "react";
 
 export default function Home() {
   const { activeContact, isMobileChatOpen } = useChatStore();
   const [mounted, setMounted] = useState(false);
   
-  // Controla se a tela de conceito (Capa) ainda está visível
   const [introFinished, setIntroFinished] = useState(false);
 
   useEffect(() => setMounted(true), []);
@@ -20,23 +19,16 @@ export default function Home() {
 
   return (
     <main className="flex h-screen w-screen bg-[#d1d7db] dark:bg-[#0c1317] xl:py-5 xl:px-[5%] relative overflow-hidden">
-      
-      {/* TELA DE CONCEITO / CAPA */}
-      {/* Ela cobre tudo inicialmente. Quando onComplete roda, ela sai de cena. */}
       {!introFinished && (
         <ConceptScreen onComplete={() => setIntroFinished(true)} />
       )}
 
-      {/* CONTAINER PRINCIPAL DO APP (Fica por baixo da capa) */}
       <div className="flex w-full h-full bg-white dark:bg-whatsapp-dark-bg xl:rounded-lg overflow-hidden shadow-lg xl:max-w-[1600px] mx-auto">
          
-         {/* ÁREA DA ESQUERDA (Navegação + Lista de Contatos) */}
          <div className={`${isMobileChatOpen ? 'hidden md:flex' : 'flex'} w-full md:w-auto h-full`}>
             <AppNavigation />
             <Sidebar />
          </div>
-
-         {/* ÁREA DA DIREITA (Chat) */}
          <div className={`
             flex-1 h-full bg-whatsapp-chat-bg dark:bg-[#0b141a] relative 
             ${isMobileChatOpen ? 'flex' : 'hidden'} md:flex flex-col border-l dark:border-gray-700/50
@@ -44,7 +36,6 @@ export default function Home() {
           {activeContact ? (
              <ChatWindow />
           ) : (
-            // Placeholder (Tela vazia quando nenhum chat está selecionado)
             <div className="hidden md:flex flex-col items-center justify-center h-full bg-[#f0f2f5] dark:bg-[#222e35] border-b-[6px] border-whatsapp-teal select-none">
               <div className="text-center max-w-md px-6">
                   <h1 className="text-3xl font-light text-[#41525d] dark:text-[#e9edef] mt-4">
