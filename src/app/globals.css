@@ -1,35 +1,67 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-rgb: 240, 242, 245; /* whatsapp-light */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Cores do WhatsApp (Light Mode) */
+  --color-whatsapp-teal: #008069;
+  --color-whatsapp-light: #f0f2f5;
+  --color-whatsapp-chat-bg: #efeae2;
+  --color-whatsapp-message-out: #dcf8c6;
+  --color-whatsapp-message-in: #ffffff;
+
+  /* Cores do WhatsApp (Dark Mode) */
+  --color-whatsapp-dark-bg: #111b21;
+  --color-whatsapp-dark-header: #202c33;
+  --color-whatsapp-dark-message-out: #005c4b;
+  --color-whatsapp-dark-message-in: #202c33;
+  --color-whatsapp-accent: #00a884;
+
+  /* Background Patterns */
+  --background-image-chat-pattern-light: url('/assets/whatsapp-bg-light.png');
+  --background-image-chat-pattern-dark: url('/assets/whatsapp-bg-dark.png');
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-rgb: 17, 27, 33; /* whatsapp-dark-bg */
+/* Configuração base e utilitários customizados 
+  No v4, usamos CSS nativo para isso.
+*/
+
+:root {
+  /* Variáveis base se precisar */
+  --foreground-rgb: 0, 0, 0;
+  --background-rgb: 240, 242, 245;
+}
+
+/* Scrollbar Customizada (Estilo WhatsApp) */
+@layer utilities {
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+  }
+  .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2);
   }
 }
 
+/* Lenis (Smooth Scroll) Config */
 html.lenis, html.lenis body {
   height: auto;
 }
-
 .lenis.lenis-smooth {
   scroll-behavior: auto !important;
 }
-
 .lenis.lenis-smooth [data-lenis-prevent] {
   overscroll-behavior: contain;
 }
-
 .lenis.lenis-stopped {
   overflow: hidden;
 }
-
 .lenis.lenis-scrolling iframe {
   pointer-events: none;
 }
