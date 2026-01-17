@@ -4,9 +4,10 @@ import { useChatStore } from "@/store/useChatStore";
 import MessageBubble from "./MessageBubble";
 import ChatInput from "./ChatInput";
 import TypingIndicator from "./TypingIndicator";
-import { MoreVertical, Search, ArrowLeft } from "lucide-react"; // Adicionei ArrowLeft
+import { MoreVertical, Search, ArrowLeft } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
+import SpotlightBackground from "./SpotlightBackground";
 
 export default function ChatWindow() {
   const { activeContact, closeMobileChat, chats, isTyping } = useChatStore();
@@ -23,7 +24,8 @@ export default function ChatWindow() {
 
   return (
     // Fundo base do chat (Bege claro no light, Escuro profundo no dark)
-    <div className="flex flex-col h-full w-full bg-[#efeae2] dark:bg-[#0b141a] relative">
+    <div className="flex flex-col h-full w-full bg-[#efeae2] dark:bg-[#0b141a] relative group">
+      <SpotlightBackground />
       
       {/* HEADER */}
       <header className="bg-wa-light-bg dark:bg-wa-dark-header h-[60px] px-4 flex justify-between items-center border-b border-wa-border-light dark:border-wa-border-dark z-20 shadow-sm shrink-0">
@@ -79,8 +81,8 @@ export default function ChatWindow() {
                 </span>
             </div>
 
-            {messages.map((msg) => (
-                <MessageBubble key={msg.id} message={msg} />
+            {messages.map((msg, idx) => (
+                <MessageBubble key={msg.id} message={msg} index={idx} />
             ))}
 
             {/* Indicador de Digitando */}

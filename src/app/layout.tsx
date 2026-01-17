@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import SmoothScrolling from "@/components/SmoothScrolling";
 
 export const metadata: Metadata = {
   title: "Nicolas | Full Stack Developer",
@@ -13,9 +14,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className="bg-whatsapp-light dark:bg-whatsapp-dark-bg text-gray-900 dark:text-gray-100 overflow-hidden h-screen w-screen">
-        {/* O overflow-hidden aqui é vital porque o app se comporta como uma "janela" e não um site longo com scroll na janela inteira */}
-        {children}
+      <body className="bg-wa-light-bg dark:bg-wa-dark-bg text-wa-primary dark:text-[#e9edef] overflow-hidden h-screen w-screen">
+        <SmoothScrolling>
+            {children}
+        </SmoothScrolling>
       </body>
     </html>
   );

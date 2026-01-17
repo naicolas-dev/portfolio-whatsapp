@@ -5,6 +5,7 @@ import { useChatStore } from "@/store/useChatStore";
 import { Search, Plus, MoreVertical, ListFilter } from "lucide-react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion"; // Importação adicionada
 
 export default function Sidebar() {
   const { activeContact, setActiveContact } = useChatStore();
@@ -12,7 +13,7 @@ export default function Sidebar() {
   return (
     <aside className="flex flex-col h-full bg-white dark:bg-wa-dark-bg border-r border-wa-border-light dark:border-wa-border-dark w-full md:w-[400px] flex-shrink-0">
       
-      {/* 1. Header Sidebar: Background #f0f2f5 e layout ajustado */}
+      {/* 1. Header Sidebar */}
       <header className="h-[60px] px-4 flex items-center justify-between bg-wa-light-bg dark:bg-wa-dark-header flex-shrink-0">
         <h1 className="text-xl font-bold text-[#41525d] dark:text-[#d1d7db]">Conversas</h1>
         
@@ -54,17 +55,32 @@ export default function Sidebar() {
         </div>
       </div>
 
-      {/* 3. Lista de Chats (Padding Reduzido + Borda Indentada) */}
+      {/* 3. Lista de Chats (Com Motion) */}
       <div className="flex-1 overflow-y-auto custom-scrollbar bg-white dark:bg-wa-dark-bg">
-        {contacts.map((contact) => (
-          <div 
+        {contacts.map((contact, i) => (
+          <motion.div 
             key={contact.id}
             onClick={() => setActiveContact(contact)}
+            // Animação de Entrada da Lista (Cascata)
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: i * 0.05 }}
+            
+            // Animação de Hover (Magnética)
+            whileHover={{ 
+                scale: 1.02, 
+                x: 5, 
+                backgroundColor: "rgba(255,255,255,0.03)",
+                transition: { type: "spring", stiffness: 300 }
+            }}
+            whileTap={{ scale: 0.98 }}
+            
             className={cn(
-              "flex items-center px-3 py-2.5 cursor-pointer transition-colors relative group", // Padding ajustado
+              "flex items-center px-3 py-2.5 cursor-pointer transition-colors relative group border-l-4 border-transparent", 
+              // Adicionei uma borda transparente na esquerda para usar de indicador
               activeContact?.id === contact.id 
-                ? "bg-wa-light-bg dark:bg-wa-dark-header" // Selected: tom suave
-                : "hover:bg-[#f5f6f6] dark:hover:bg-[#202c33]" // Hover: black/5 logic
+                ? "bg-wa-light-bg dark:bg-wa-dark-header border-l-wa-teal dark:border-l-wa-teal" // Indicador Ativo
+                : "hover:bg-transparent" // Deixe o motion controlar o bg
             )}
           >
             {/* Avatar */}
@@ -72,10 +88,9 @@ export default function Sidebar() {
               <Image src={contact.avatar} alt={contact.name} fill className="rounded-full object-cover" />
             </div>
 
-            {/* Info Container + Borda Indentada (After trick) */}
+            {/* Info Container + Borda Indentada */}
             <div className={cn(
                 "flex-1 min-w-0 h-full flex flex-col justify-center border-indent-light border-indent-dark",
-                // Remove a borda do último item ou se estiver selecionado (opcional, mas WA faz isso as vezes)
                 "group-last:after:hidden" 
             )}>
               <div className="flex justify-between items-baseline mb-0.5">
@@ -102,7 +117,7 @@ export default function Sidebar() {
                 )}
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </aside>
