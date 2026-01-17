@@ -20,7 +20,7 @@ export const contacts: Contact[] = [
   },
   {
     id: '2',
-    name: '02. Stack', // Era "Stack"
+    name: '02. Stack',
     avatar: 'https://ui-avatars.com/api/?name=JS+TS&background=0b141a&color=fff&font-size=0.4',
     lastMessage: 'Meu arsenal de Dev.',
     time: 'Ontem',
@@ -28,7 +28,7 @@ export const contacts: Contact[] = [
   },
   {
     id: '3',
-    name: '03. Projetos', // Era "Projetos" (Frequência Certa)
+    name: '03. Projetos',
     avatar: 'https://ui-avatars.com/api/?name=FC&background=008069&color=fff',
     lastMessage: 'Meus projetos.',
     time: 'Segunda',
@@ -37,7 +37,7 @@ export const contacts: Contact[] = [
   },
   {
     id: '4',
-    name: '04. Contato', // Era "Contato"
+    name: '04. Contato',
     avatar: 'https://ui-avatars.com/api/?name=HI&background=25d366&color=fff',
     lastMessage: 'Vamos construir algo juntos?',
     time: '15/01',

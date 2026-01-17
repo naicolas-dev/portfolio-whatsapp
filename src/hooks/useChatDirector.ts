@@ -2,14 +2,22 @@ import { useState, useEffect, useRef } from 'react';
 import { Message } from '@/data/chatData';
 import { useChatStore } from '@/store/useChatStore';
 
+const playMessageSound = () => {
+  if (typeof window !== 'undefined') {
+    const audio = new Audio('/sounds/notification.mp3'); 
+    audio.volume = 0.5;
+    audio.play().catch(() => {});
+  }
+};
+
 export function useChatDirector(fullHistory: Message[], chatId: string) {
   const [visibleMessages, setVisibleMessages] = useState<Message[]>([]);
-  const { setTyping } = useChatStore(); // Vamos precisar expor o setTyping na store ou usar local
+  const { setTyping } = useChatStore(); 
   const isMounted = useRef(true);
 
   useEffect(() => {
     isMounted.current = true;
-    setVisibleMessages([]); // Reseta ao mudar de chat (Capítulo)
+    setVisibleMessages([]); 
     
     let currentIndex = 0;
     let timeoutId: NodeJS.Timeout;
@@ -21,14 +29,11 @@ export function useChatDirector(fullHistory: Message[], chatId: string) {
       }
 
       const msg = fullHistory[currentIndex];
-      const isMe = msg.sender === 'me'; // Nicolas falando
+      const isMe = msg.sender === 'me';
 
       if (isMe) {
-        // MOMENTO DRAMÁTICO: Nicolas está digitando...
         setTyping(true);
-        
-        // Calcula tempo de digitação baseado no tamanho do texto (Humanize)
-        // Mínimo 1s, + 30ms por caractere
+      
         const typingTime = 800 + (msg.text?.length || 0) * 30;
         
         timeoutId = setTimeout(() => {
@@ -37,25 +42,22 @@ export function useChatDirector(fullHistory: Message[], chatId: string) {
           setTyping(false);
           setVisibleMessages(prev => [...prev, msg]);
           
-          // Tocar som aqui (opcional)
-          // playMessageSound();
+          playMessageSound(); 
 
           currentIndex++;
-          // Pausa para o usuário ler antes da próxima
+          
           const readingPause = 1000 + (msg.text?.length || 0) * 20;
           timeoutId = setTimeout(playNextMessage, readingPause);
 
         }, typingTime);
 
       } else {
-        // Mensagem do visitante ou sistema (aparece instantâneo)
         setVisibleMessages(prev => [...prev, msg]);
         currentIndex++;
         timeoutId = setTimeout(playNextMessage, 500);
       }
     };
 
-    // Pequeno delay inicial para dar "ar" ao entrar no capítulo
     timeoutId = setTimeout(playNextMessage, 600);
 
     return () => {

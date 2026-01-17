@@ -5,7 +5,7 @@ import { useChatStore } from "@/store/useChatStore";
 import { Search, Plus, MoreVertical, ListFilter } from "lucide-react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion"; // Importação adicionada
+import { motion } from "framer-motion";
 
 export default function Sidebar() {
   const { activeContact, setActiveContact } = useChatStore();
@@ -13,7 +13,6 @@ export default function Sidebar() {
   return (
     <aside className="flex flex-col h-full bg-white dark:bg-wa-dark-bg border-r border-wa-border-light dark:border-wa-border-dark w-full md:w-[400px] flex-shrink-0">
       
-      {/* 1. Header Sidebar */}
       <header className="h-[60px] px-4 flex items-center justify-between bg-wa-light-bg dark:bg-wa-dark-header flex-shrink-0">
         <h1 className="text-xl font-bold text-[#41525d] dark:text-[#d1d7db]">Conversas</h1>
         
@@ -23,9 +22,7 @@ export default function Sidebar() {
         </div>
       </header>
 
-      {/* 2. Search & Chips */}
       <div className="flex flex-col bg-white dark:bg-wa-dark-bg border-b border-wa-border-light dark:border-wa-border-dark pb-2">
-        {/* Search */}
         <div className="px-3 py-2">
           <div className="flex items-center bg-wa-light-bg dark:bg-wa-dark-header rounded-lg px-4 h-[35px] transition-all focus-within:shadow-sm">
             <Search size={18} className="text-wa-secondary dark:text-[#8696a0] mr-6" />
@@ -37,7 +34,6 @@ export default function Sidebar() {
           </div>
         </div>
 
-        {/* Chips (Filtros) */}
         <div className="px-3 flex gap-2 items-center overflow-x-auto no-scrollbar">
            {['Tudo', 'Não lidas', 'Favoritas', 'Grupos'].map((filter, index) => (
                <button 
@@ -55,13 +51,11 @@ export default function Sidebar() {
         </div>
       </div>
 
-      {/* 3. Lista de Chats (Com Motion) */}
       <div className="flex-1 overflow-y-auto custom-scrollbar bg-white dark:bg-wa-dark-bg">
         {contacts.map((contact) => (
           <motion.div 
             key={contact.id}
             onClick={() => setActiveContact(contact)}
-            // AQUI ESTÁ A MÁGICA DO MOTION:
             whileHover={{ scale: 1.02, x: 4, backgroundColor: "rgba(0,0,0,0.02)" }} 
             whileTap={{ scale: 0.98 }}
             transition={{ type: "spring", stiffness: 400, damping: 17 }}
@@ -69,15 +63,13 @@ export default function Sidebar() {
               "flex items-center px-3 py-2.5 cursor-pointer transition-colors relative group", 
               activeContact?.id === contact.id 
                 ? "bg-wa-light-bg dark:bg-wa-dark-header" 
-                : "hover:bg-[#f5f6f6] dark:hover:bg-[#202c33]" // Mantendo hover nativo para fallback/suavidade
+                : "hover:bg-[#f5f6f6] dark:hover:bg-[#202c33]"
             )}
           >
-            {/* Avatar */}
             <div className="relative w-[49px] h-[49px] flex-shrink-0 mr-3">
               <Image src={contact.avatar} alt={contact.name} fill className="rounded-full object-cover" />
             </div>
 
-            {/* Info Container + Borda Indentada */}
             <div className={cn(
                 "flex-1 min-w-0 h-full flex flex-col justify-center border-indent-light border-indent-dark",
                 "group-last:after:hidden" 

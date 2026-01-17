@@ -15,7 +15,7 @@ export const chatData: Record<string, Message[]> = {
     { id: '1', sender: 'me', text: 'Olá! Eu me chamo Nicolas. 👋', timestamp: '09:00', status: 'read' },
     { id: '2', sender: 'me', text: 'Muita gente acha que programar é só digitar código, rolar o mouse e encarar letras coloridas...', timestamp: '09:00', status: 'read' },
     { id: '3', sender: 'me', text: 'Mas para mim, é sobre resolver problemas complexos, como se fosse um grande quebra-cabeças 🧩', timestamp: '09:01', status: 'read' },
-    { id: '4', sender: 'me', text: 'Tenho 17 anos, sou focado em Laravel e Next.js, e obcecado por interfaces que entregam uma experiência imersiva digital.', timestamp: '09:01', status: 'read' }
+    { id: '4', sender: 'me', text: 'Tenho 17 anos, sou focado em Laravel e Next.js, e obcecado por interfaces que entregam uma experiência imersiva digital.', timestamp: '09:02', status: 'read' }
   ],
   
   // CAPÍTULO 2: O ARSENAL (STACK)
@@ -134,8 +134,7 @@ export const chatData: Record<string, Message[]> = {
 ]
 ,
 
-  // --- AQUI ESTÁ A MUDANÇA ---
-  // CAPÍTULO 4: CONTATO (Atualizado com seus dados)
+  // CAPÍTULO 4: CONTATO
   '4': [
     { 
       id: 'c1', 
@@ -152,7 +151,7 @@ export const chatData: Record<string, Message[]> = {
       status: 'read' 
     },
     
-    // GITHUB (Já coloquei o seu correto)
+    // GITHUB
     { 
       id: 'c3', 
       sender: 'me', 
@@ -162,7 +161,7 @@ export const chatData: Record<string, Message[]> = {
       status: 'read' 
     },
 
-    // LINKEDIN (Substitua pelo seu link real)
+    // LINKEDIN
     { 
       id: 'c4', 
       sender: 'me', 
@@ -172,7 +171,7 @@ export const chatData: Record<string, Message[]> = {
       status: 'read' 
     },
 
-    // EMAIL (Substitua pelo seu email real)
+    // EMAIL
     { 
       id: 'c5', 
       sender: 'me', 

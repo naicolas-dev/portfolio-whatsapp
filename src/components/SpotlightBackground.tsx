@@ -24,7 +24,6 @@ export default function SpotlightBackground() {
         onMouseLeave={handleMouseLeave}
         className="absolute inset-0 z-0 overflow-hidden pointer-events-none"
     >
-      {/* 1. O Spotlight: Uma luz suave que segue o mouse */}
       <div
         className="pointer-events-none absolute -inset-px transition-opacity duration-500"
         style={{
@@ -33,7 +32,6 @@ export default function SpotlightBackground() {
         }}
       />
       
-      {/* 2. Texture Grain: O segredo dos sites Awwwards (Noise Overlay) */}
       <div 
         className="absolute inset-0 opacity-[0.05] mix-blend-overlay pointer-events-none"
         style={{ 

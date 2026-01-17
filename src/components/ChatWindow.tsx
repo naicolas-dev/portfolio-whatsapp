@@ -59,7 +59,7 @@ export default function ChatWindow() {
                 {activeContact.name}
             </h2>
             <span className={`text-[13px] leading-4 truncate ${isTyping ? 'text-[#00a884] font-medium' : 'text-wa-secondary dark:text-[#8696a0]'}`}>
-                {isTyping ? 'digitando...' : `visto por último hoje às ${activeContact.time}`}
+                {isTyping ? 'digitando...' : `Online`}
             </span>
           </div>
         </div>

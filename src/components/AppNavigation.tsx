@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 export default function AppNavigation() {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
-  // 1. Ao carregar, verifica a preferência salva ou do sistema
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
     const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -21,7 +20,6 @@ export default function AppNavigation() {
     }
   }, []);
 
-  // 2. Função de alternar
   const toggleTheme = () => {
     if (isDarkMode) {
       document.documentElement.classList.remove("dark");
@@ -37,9 +35,7 @@ export default function AppNavigation() {
   return (
     <div className="hidden md:flex flex-col justify-between w-[64px] bg-[#f0f2f5] dark:bg-[#202c33] border-r border-wa-border-light dark:border-wa-border-dark h-full py-3 items-center z-20 flex-shrink-0 transition-colors duration-300">
       
-      {/* Top Icons */}
       <div className="flex flex-col gap-5 items-center w-full">
-        {/* Ícone de Chat (Ativo) */}
         <div className="relative group cursor-pointer" title="Conversas">
             <div className="bg-[#dcf8c6] dark:bg-[#374248] p-2.5 rounded-full transition-colors">
                <MessageSquareText size={20} className="text-[#008069] dark:text-[#d1d7db]" fill="currentColor" />
@@ -60,10 +56,8 @@ export default function AppNavigation() {
         </button>
       </div>
 
-      {/* Bottom Icons */}
       <div className="flex flex-col gap-5 items-center w-full mb-2">
         
-        {/* BOTÃO DE TEMA (TOGGLE) */}
         <button 
             onClick={toggleTheme}
             title={isDarkMode ? "Mudar para modo claro" : "Mudar para modo escuro"}
@@ -76,7 +70,6 @@ export default function AppNavigation() {
             <Settings size={24} />
         </button>
         
-        {/* Avatar Pequeno (Perfil) */}
         <div className="relative w-8 h-8 rounded-full overflow-hidden cursor-pointer hover:opacity-80 transition ring-2 ring-transparent hover:ring-[#008069] p-[1px]">
              <Image 
                 src="https://github.com/naicolas-dev.png" 

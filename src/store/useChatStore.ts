@@ -2,7 +2,6 @@ import { create } from 'zustand';
 import { Contact } from '@/data/contacts';
 import { chatData, Message } from '@/data/chatData';
 
-// --- FUNÇÕES DE ÁUDIO ---
 const playSentSound = () => {
   if (typeof window !== 'undefined') {
     const audio = new Audio('/sounds/sent.mp3');
@@ -25,7 +24,6 @@ interface ChatState {
   chats: Record<string, Message[]>;
   isTyping: boolean;
   
-  // ADICIONE ESTA LINHA:
   setTyping: (status: boolean) => void;
 
   setActiveContact: (contact: Contact) => void;
