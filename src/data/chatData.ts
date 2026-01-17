@@ -9,110 +9,48 @@ export interface Message {
 }
 
 export const chatData: Record<string, Message[]> = {
-  // 1. SOBRE MIM (NICOLAS)
+  // CAPÍTULO 1: A ORIGEM
   '1': [
-    {
-      id: '1',
-      sender: 'me',
-      text: 'Fala! Eu sou o Nicolas Viana 👋',
-      timestamp: '09:30',
-      status: 'read'
-    },
-    {
-      id: '2',
-      sender: 'me',
-      text: 'Tenho 17 anos e sou estudante do Técnico em Desenvolvimento de Sistemas na Proz Educação.',
-      timestamp: '09:31',
-      status: 'read'
-    },
-    {
-      id: '3',
-      sender: 'me',
-      text: 'Sou apaixonado por Back-end (PHP/Laravel), mas também me aventuro forte no Front com Next.js e Tailwind.',
-      timestamp: '09:31',
-      status: 'read'
-    },
-    {
-        id: '4',
-        sender: 'me',
-        text: 'Atualmente buscando minha primeira oportunidade de estágio para transformar café em código! ☕💻',
-        timestamp: '09:32',
-        status: 'read'
-      }
+    { id: '1', sender: 'me', text: 'Olá! Eu sou o Nicolas. 👋', timestamp: '09:00', status: 'read' },
+    { id: '2', sender: 'me', text: 'Muita gente acha que programar é só digitar código...', timestamp: '09:00', status: 'read' },
+    { id: '3', sender: 'me', text: 'Mas para mim, é sobre resolver quebra-cabeças complexos. 🧩', timestamp: '09:01', status: 'read' },
+    { id: '4', sender: 'me', text: 'Tenho 17 anos, sou focado em Laravel e Next.js, e obcecado por interfaces que parecem mágica.', timestamp: '09:01', status: 'read' }
   ],
   
-  // 2. PROJETO DESTAQUE (FREQUÊNCIA CERTA)
+  // CAPÍTULO 2: O ARSENAL (STACK)
   '2': [
-    {
-      id: 'p1',
-      sender: 'me',
-      text: 'Esse é o meu xodó: o "Frequência Certa" 🏫',
-      timestamp: '10:00',
-      status: 'read'
-    },
-    {
-      id: 'p2',
-      sender: 'me',
-      text: 'É um sistema PWA de gestão escolar focado em resolver o problema da evasão e facilitar a chamada.',
-      timestamp: '10:01',
-      status: 'read'
-    },
-    {
-        id: 'p3',
-        sender: 'me',
-        text: 'Tecnologias: Laravel (API), Filament (Admin), PWA features e Gamificação para engajar os alunos.',
-        timestamp: '10:02',
-        status: 'read'
-    },
-    {
-        id: 'p4',
-        sender: 'me',
-        text: 'Dá uma olhada no repo: https://github.com/naicolas-dev', // Link placeholder
-        timestamp: '10:03',
-        status: 'read'
+    { id: 's1', sender: 'me', text: 'Não uso ferramentas só porque são "hype". Escolho o que resolve o problema. 🛠️', timestamp: '10:00', status: 'read' },
+    { id: 's2', sender: 'me', text: 'No Front-end, minha escolha é Next.js + Tailwind + Framer Motion para experiências fluidas (como essa aqui).', timestamp: '10:01', status: 'read' },
+    { id: 's3', sender: 'me', text: 'No Back-end, o Laravel é minha casa. Segurança, robustez e elegância.', timestamp: '10:02', status: 'read' },
+    { id: 's4', sender: 'me', text: 'E claro, estou sempre explorando IA com Hugging Face. 🤖', timestamp: '10:03', status: 'read' }
+  ],
+
+  // CAPÍTULO 3: FREQUÊNCIA CERTA (PROJETO)
+  '3': [
+    { id: 'p1', sender: 'me', text: 'Sabe qual o maior problema das escolas hoje? A evasão. 📉', timestamp: '14:00', status: 'read' },
+    { id: 'p2', sender: 'me', text: 'Criei o "Frequência Certa" para mudar isso.', timestamp: '14:01', status: 'read' },
+    { id: 'p3', sender: 'me', text: 'É um PWA gamificado onde alunos ganham recompensas por presença. Não é só um app, é uma estratégia de engajamento.', timestamp: '14:02', status: 'read' },
+    { 
+      id: 'p4', 
+      sender: 'me', 
+      text: 'O código é open source. Quer dar uma olhada na arquitetura?', 
+      link: { url: 'https://github.com/naicolas-br', label: 'Ver Repositório' },
+      timestamp: '14:03', 
+      status: 'read' 
     }
   ],
 
-  // 3. STACK TÉCNICA
-  '3': [
-      {
-        id: 's1',
-        sender: 'me',
-        text: 'Aqui está meu arsenal técnico 🛠️',
-        timestamp: '08:00',
-        status: 'read'
-      },
-      {
-        id: 's2',
-        sender: 'me',
-        text: '🔹 *Back-end:* PHP 8, Laravel, FilamentPHP, MySQL\n🔹 *Front-end:* React, Next.js, Tailwind CSS, Alpine.js\n🔹 *Tools:* Git, Docker, Insomnia',
-        timestamp: '08:01',
-        status: 'read'
-      },
-      {
-        id: 's3',
-        sender: 'me',
-        text: 'Também tenho experiência integrando IAs (Hugging Face API) em aplicações web.',
-        timestamp: '08:02',
-        status: 'read'
-      }
-  ],
-
-  // 4. CONTATO
+  // CAPÍTULO 4: CONTATO
   '4': [
-      {
-        id: 'c1',
-        sender: 'me',
-        text: 'Curtiu o portfólio? Bora bater um papo!',
-        timestamp: '11:00',
-        status: 'read'
-      },
-      {
-        id: 'c2',
-        sender: 'me',
-        text: 'Você pode me encontrar no LinkedIn ou ver meus códigos no GitHub.',
-        timestamp: '11:01',
-        status: 'read'
-      }
+    { id: 'c1', sender: 'me', text: 'Se você chegou até aqui, já sabe como eu penso.', timestamp: '16:00', status: 'read' },
+    { id: 'c2', sender: 'me', text: 'Estou pronto para o próximo desafio. Bora conversar?', timestamp: '16:01', status: 'read' },
+    { 
+      id: 'c3', 
+      sender: 'me', 
+      text: 'Me chama no LinkedIn ou manda um "Oi" aqui mesmo.', 
+      link: { url: 'https://linkedin.com/in/seu-linkedin', label: 'Acessar LinkedIn' },
+      timestamp: '16:02', 
+      status: 'read' 
+    }
   ]
 };

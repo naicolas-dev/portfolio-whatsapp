@@ -2,9 +2,9 @@
 
 import { useChatStore } from "@/store/useChatStore";
 import Sidebar from "@/components/Sidebar";
-import AppNavigation from "@/components/AppNavigation"; // <--- Importe
+import AppNavigation from "@/components/AppNavigation";
 import ChatWindow from "@/components/ChatWindow";
-import IntroAnimation from "@/components/IntroAnimation";
+import BootSequence from "@/components/BootSequence";
 import { useEffect, useState } from "react";
 
 export default function Home() {
@@ -20,7 +20,7 @@ export default function Home() {
     <main className="flex h-screen w-screen bg-[#d1d7db] dark:bg-[#0c1317] xl:py-5 xl:px-[5%] relative overflow-hidden">
       
       {!introFinished && (
-        <IntroAnimation onComplete={() => setIntroFinished(true)} />
+        <BootSequence onComplete={() => setIntroFinished(true)} />
       )}
 
       {/* CONTAINER PRINCIPAL */}

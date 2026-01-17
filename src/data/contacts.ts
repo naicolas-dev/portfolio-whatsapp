@@ -11,35 +11,35 @@ export interface Contact {
 export const contacts: Contact[] = [
   {
     id: '1',
-    name: 'Nicolas Viana', // Seu "Perfil" principal
+    name: 'Sobre Mim',
     avatar: 'https://github.com/naicolas-dev.png',
-    lastMessage: '📸 Foto', // Simulando que mandou uma mídia
-    time: '09:30',
+    lastMessage: 'Me conheça melhor.',
+    time: '09:00',
     unreadCount: 1,
     type: 'about'
   },
   {
     id: '2',
-    name: 'Frequência Certa 🎓', // Destaque para o TCC
-    avatar: 'https://ui-avatars.com/api/?name=F+C&background=008069&color=fff',
-    lastMessage: 'Novo commit no repositório! 🚀',
+    name: 'Stack', // Era "Stack"
+    avatar: 'https://ui-avatars.com/api/?name=JS+TS&background=0b141a&color=fff&font-size=0.4',
+    lastMessage: 'Meu arsenal de Dev.',
     time: 'Ontem',
+    type: 'stack'
+  },
+  {
+    id: '3',
+    name: 'Projetos', // Era "Projetos" (Frequência Certa)
+    avatar: 'https://ui-avatars.com/api/?name=FC&background=008069&color=fff',
+    lastMessage: 'Meus projetos.',
+    time: 'Segunda',
     unreadCount: 3,
     type: 'projects'
   },
   {
-    id: '3',
-    name: 'Stack & Tech',
-    avatar: 'https://ui-avatars.com/api/?name=JS+PHP&background=3b82f6&color=fff',
-    lastMessage: 'Laravel, Next.js, Filament...',
-    time: 'Segunda',
-    type: 'stack'
-  },
-  {
     id: '4',
-    name: 'Contato Profissional',
-    avatar: 'https://ui-avatars.com/api/?name=C+T&background=25d366&color=fff',
-    lastMessage: 'Vamos agendar uma reunião?',
+    name: 'Contato', // Era "Contato"
+    avatar: 'https://ui-avatars.com/api/?name=HI&background=25d366&color=fff',
+    lastMessage: 'Vamos construir algo juntos?',
     time: '15/01',
     type: 'contact'
   },
