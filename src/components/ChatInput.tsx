@@ -35,7 +35,7 @@ export default function ChatInput() {
             value={text}
             onChange={(e) => setText(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-            placeholder="Digite uma mensagem" 
+            placeholder="Digite qualquer coisa para reiniciar a conversa." 
             className="w-full bg-transparent outline-none text-[15px] text-wa-primary dark:text-[#d1d7db] placeholder:text-wa-secondary dark:placeholder:text-[#8696a0] px-2 h-[26px]"
         />
       </div>
