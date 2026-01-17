@@ -14,7 +14,7 @@ O projeto foi construído sobre a premissa de que um portfólio não deve ser ap
 
 ## Preview
 
-<img src="public/screenshot/image.png" alt="Page Preview"
+<img src="public/screenshot/image.png" alt="Page Preview">
 
 ## Stack Tecnológica
 
