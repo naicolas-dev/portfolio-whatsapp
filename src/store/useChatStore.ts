@@ -95,7 +95,7 @@ export const useChatStore = create<ChatState>((set, get) => ({
                     [contactId]: [...(state.chats[contactId] || []), automaticResponse]
                 }
             });
-        }, 2500); 
+        }, 1000); 
 
     }, 1000); 
   },

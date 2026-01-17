@@ -1,7 +1,7 @@
 "use client";
 
 import { useChatStore } from "@/store/useChatStore";
-import { Mic, Paperclip, Send, Smile } from "lucide-react";
+import { Mic, Plus, Smile, Send } from "lucide-react"; // Importe o Plus
 import { useState } from "react";
 
 export default function ChatInput() {
@@ -10,43 +10,41 @@ export default function ChatInput() {
 
   const handleSend = () => {
     if (!text.trim() || !activeContact) return;
-    
     sendMessage(activeContact.id, text);
-    setText(""); // Limpa o input
-    
-    // Aqui no futuro podemos adicionar som de envio
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') {
-      handleSend();
-    }
+    setText("");
   };
 
   return (
-    <footer className="bg-whatsapp-light dark:bg-whatsapp-dark-header px-4 py-2 flex items-center gap-2 md:gap-4 flex-shrink-0 z-20 min-h-[62px]">
+    <footer className="bg-wa-light-bg dark:bg-wa-dark-header px-4 py-2 flex items-center gap-2 flex-shrink-0 min-h-[62px] z-20">
       
-      <div className="flex gap-2 text-gray-500 dark:text-gray-400">
-        <button className="hidden md:block p-2 hover:bg-black/5 rounded-full transition"><Smile size={24} /></button>
-        <button className="p-2 hover:bg-black/5 rounded-full transition"><Paperclip size={24} /></button>
-      </div>
+      {/* Botão + (A esquerda) */}
+      <button className="text-wa-panel-header-icon dark:text-[#8696a0] p-1 rounded-full hover:bg-[rgba(0,0,0,0.05)] transition">
+        <Plus size={26} strokeWidth={1.5} />
+      </button>
 
-      <div className="flex-1 bg-white dark:bg-[#2a3942] rounded-lg px-4 py-2 flex items-center">
+      {/* Conteúdo Central (Emoji + Input) */}
+      <div className="flex-1 bg-white dark:bg-wa-dark-input rounded-lg px-2 py-1.5 flex items-center shadow-sm">
+        
+        {/* Emoji Button (Dentro do pill ou colado nele) */}
+        <button className="text-wa-panel-header-icon dark:text-[#8696a0] p-1 mx-1 hover:opacity-80 transition">
+            <Smile size={24} strokeWidth={1.5} />
+        </button>
+
         <input 
             type="text" 
             value={text}
             onChange={(e) => setText(e.target.value)}
-            onKeyDown={handleKeyDown}
+            onKeyDown={(e) => e.key === 'Enter' && handleSend()}
             placeholder="Digite uma mensagem" 
-            className="w-full bg-transparent outline-none text-gray-700 dark:text-gray-100 placeholder:text-gray-500"
+            className="w-full bg-transparent outline-none text-[15px] text-wa-primary dark:text-[#d1d7db] placeholder:text-wa-secondary dark:placeholder:text-[#8696a0] px-2 h-[26px]"
         />
       </div>
 
+      {/* Mic / Send (A direita) */}
       <button 
         onClick={handleSend}
-        className="p-2 text-gray-500 dark:text-gray-400 hover:bg-black/5 rounded-full transition"
+        className="text-wa-panel-header-icon dark:text-[#8696a0] p-2 rounded-full hover:bg-[rgba(0,0,0,0.05)] transition"
       >
-        {/* Se tiver texto mostra Send, senão Mic */}
         {text.trim() ? <Send size={24} /> : <Mic size={24} />}
       </button>
     </footer>

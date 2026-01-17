@@ -1,67 +1,54 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
+@variant dark (&:where(.dark, .dark *));
 
 @theme {
-  /* Cores do WhatsApp (Light Mode) */
-  --color-whatsapp-teal: #008069;
-  --color-whatsapp-light: #f0f2f5;
-  --color-whatsapp-chat-bg: #efeae2;
-  --color-whatsapp-message-out: #dcf8c6;
-  --color-whatsapp-message-in: #ffffff;
+  /* Paleta Oficial WhatsApp Web (Reverse Engineered) */
+  --color-wa-teal: #008069;
+  --color-wa-light-bg: #f0f2f5;         /* Fundo geral App / Header Chat */
+  --color-wa-panel-header-icon: #54656f;/* Ícones inativos */
+  --color-wa-input-bg: #ffffff;         /* Fundo do input pill */
+  
+  /* Bordas Suaves (Crucial) */
+  --color-wa-border-light: #e9edef;
+  --color-wa-border-dark: #2a3942;
 
-  /* Cores do WhatsApp (Dark Mode) */
-  --color-whatsapp-dark-bg: #111b21;
-  --color-whatsapp-dark-header: #202c33;
-  --color-whatsapp-dark-message-out: #005c4b;
-  --color-whatsapp-dark-message-in: #202c33;
-  --color-whatsapp-accent: #00a884;
+  /* Texto */
+  --color-wa-primary: #111b21;          /* Títulos */
+  --color-wa-secondary: #667781;        /* Subtítulos / Hora */
 
-  /* Background Patterns */
-  --background-image-chat-pattern-light: url('/assets/whatsapp-bg-light.png');
-  --background-image-chat-pattern-dark: url('/assets/whatsapp-bg-dark.png');
+  /* Dark Mode (Mapeamento) */
+  --color-wa-dark-bg: #111b21;          /* Fundo Sidebar */
+  --color-wa-dark-header: #202c33;      /* Headers / Input Bar */
+  --color-wa-dark-hover: #202c33;
+  --color-wa-dark-input: #2a3942;
+  
+  /* Chat Colors */
+  --color-wa-msg-out: #d9fdd3;
+  --color-wa-msg-in: #ffffff;
+  --color-wa-msg-out-dark: #005c4b;
+  --color-wa-msg-in-dark: #202c33;
+
+  /* Background Pattern (SVG de contorno sutil estilo WhatsApp) */
+  --bg-doodle-light: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15 15h10v10H15V15zm20 20h10v10H35V35zm-20 20h10v10H15V55zm40-40h10v10H55V15zm20 20h10v10H75V35zm-20 20h10v10H55V55zM15 75h10v10H15V75zm20 20h10v10H35V95zm40-20h10v10H75V75zm20 20h10v10H95V95z' fill='%23aebac1' fill-opacity='0.15' fill-rule='evenodd'/%3E%3C/svg%3E");
+  
+  --bg-doodle-dark: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15 15h10v10H15V15zm20 20h10v10H35V35zm-20 20h10v10H15V55zm40-40h10v10H55V15zm20 20h10v10H75V35zm-20 20h10v10H55V55zM15 75h10v10H15V75zm20 20h10v10H35V95zm40-20h10v10H75V75zm20 20h10v10H95V95z' fill='%23667781' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
 }
 
-/* Configuração base e utilitários customizados 
-  No v4, usamos CSS nativo para isso.
-*/
-
-:root {
-  /* Variáveis base se precisar */
-  --foreground-rgb: 0, 0, 0;
-  --background-rgb: 240, 242, 245;
-}
-
-/* Scrollbar Customizada (Estilo WhatsApp) */
+/* Utilitário para o divisor indentado (O "Pulo do Gato" da lista) */
 @layer utilities {
-  .custom-scrollbar::-webkit-scrollbar {
-    width: 6px;
+  .border-indent-light::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 1px;
+    left: 80px; /* Pula o avatar + padding */
+    background-color: var(--color-wa-border-light);
   }
-  .custom-scrollbar::-webkit-scrollbar-track {
-    background: transparent;
+  
+  .dark .border-indent-dark::after {
+    background-color: var(--color-wa-border-dark);
+    left: 80px;
   }
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 3px;
-  }
-  .dark .custom-scrollbar::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.2);
-  }
-}
-
-/* Lenis (Smooth Scroll) Config */
-html.lenis, html.lenis body {
-  height: auto;
-}
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-.lenis.lenis-stopped {
-  overflow: hidden;
-}
-.lenis.lenis-scrolling iframe {
-  pointer-events: none;
 }

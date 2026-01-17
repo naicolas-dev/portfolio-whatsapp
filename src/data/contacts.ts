@@ -11,43 +11,35 @@ export interface Contact {
 export const contacts: Contact[] = [
   {
     id: '1',
-    name: 'Sobre Mim',
-    avatar: 'https://ui-avatars.com/api/?name=Nicolas+Viana&background=008069&color=fff', // Placeholder temporário
-    lastMessage: 'Oi, eu sou o Nicolas 👋',
+    name: 'Nicolas Viana', // Seu "Perfil" principal
+    avatar: 'https://github.com/naicolas-dev.png',
+    lastMessage: '📸 Foto', // Simulando que mandou uma mídia
     time: '09:30',
     unreadCount: 1,
     type: 'about'
   },
   {
     id: '2',
-    name: 'Projetos',
-    avatar: 'https://ui-avatars.com/api/?name=P+J&background=ffa500&color=fff',
-    lastMessage: 'Confira meu último trabalho...',
+    name: 'Frequência Certa 🎓', // Destaque para o TCC
+    avatar: 'https://ui-avatars.com/api/?name=F+C&background=008069&color=fff',
+    lastMessage: 'Novo commit no repositório! 🚀',
     time: 'Ontem',
     unreadCount: 3,
     type: 'projects'
   },
   {
     id: '3',
-    name: 'Stack & Skills',
-    avatar: 'https://ui-avatars.com/api/?name=S+T&background=007bff&color=fff',
+    name: 'Stack & Tech',
+    avatar: 'https://ui-avatars.com/api/?name=JS+PHP&background=3b82f6&color=fff',
     lastMessage: 'Laravel, Next.js, Filament...',
     time: 'Segunda',
     type: 'stack'
   },
   {
     id: '4',
-    name: 'Experiência',
-    avatar: 'https://ui-avatars.com/api/?name=E+X&background=6f42c1&color=fff',
-    lastMessage: 'Minha jornada profissional 🚀',
-    time: 'Dom',
-    type: 'experience'
-  },
-    {
-    id: '5',
-    name: 'Contato',
+    name: 'Contato Profissional',
     avatar: 'https://ui-avatars.com/api/?name=C+T&background=25d366&color=fff',
-    lastMessage: 'Vamos trabalhar juntos?',
+    lastMessage: 'Vamos agendar uma reunião?',
     time: '15/01',
     type: 'contact'
   },
