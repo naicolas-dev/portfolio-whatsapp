@@ -57,30 +57,19 @@ export default function Sidebar() {
 
       {/* 3. Lista de Chats (Com Motion) */}
       <div className="flex-1 overflow-y-auto custom-scrollbar bg-white dark:bg-wa-dark-bg">
-        {contacts.map((contact, i) => (
+        {contacts.map((contact) => (
           <motion.div 
             key={contact.id}
             onClick={() => setActiveContact(contact)}
-            // Animação de Entrada da Lista (Cascata)
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: i * 0.05 }}
-            
-            // Animação de Hover (Magnética)
-            whileHover={{ 
-                scale: 1.02, 
-                x: 5, 
-                backgroundColor: "rgba(255,255,255,0.03)",
-                transition: { type: "spring", stiffness: 300 }
-            }}
+            // AQUI ESTÁ A MÁGICA DO MOTION:
+            whileHover={{ scale: 1.02, x: 4, backgroundColor: "rgba(0,0,0,0.02)" }} 
             whileTap={{ scale: 0.98 }}
-            
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
             className={cn(
-              "flex items-center px-3 py-2.5 cursor-pointer transition-colors relative group border-l-4 border-transparent", 
-              // Adicionei uma borda transparente na esquerda para usar de indicador
+              "flex items-center px-3 py-2.5 cursor-pointer transition-colors relative group", 
               activeContact?.id === contact.id 
-                ? "bg-wa-light-bg dark:bg-wa-dark-header border-l-wa-teal dark:border-l-wa-teal" // Indicador Ativo
-                : "hover:bg-transparent" // Deixe o motion controlar o bg
+                ? "bg-wa-light-bg dark:bg-wa-dark-header" 
+                : "hover:bg-[#f5f6f6] dark:hover:bg-[#202c33]" // Mantendo hover nativo para fallback/suavidade
             )}
           >
             {/* Avatar */}

@@ -3,11 +3,10 @@ import { Contact } from '@/data/contacts';
 import { chatData, Message } from '@/data/chatData';
 
 // --- FUNÇÕES DE ÁUDIO ---
-// Criamos os objetos de áudio apenas no lado do cliente (verificação typeof window)
 const playSentSound = () => {
   if (typeof window !== 'undefined') {
     const audio = new Audio('/sounds/sent.mp3');
-    audio.volume = 0.5; // Volume agradável
+    audio.volume = 0.5;
     audio.play().catch(e => console.log("Áudio bloqueado pelo navegador:", e));
   }
 };
@@ -26,6 +25,9 @@ interface ChatState {
   chats: Record<string, Message[]>;
   isTyping: boolean;
   
+  // ADICIONE ESTA LINHA:
+  setTyping: (status: boolean) => void;
+
   setActiveContact: (contact: Contact) => void;
   closeMobileChat: () => void;
   sendMessage: (contactId: string, text: string) => void;
@@ -36,6 +38,9 @@ export const useChatStore = create<ChatState>((set, get) => ({
   isMobileChatOpen: false,
   chats: chatData,
   isTyping: false,
+
+  // IMPLEMENTE A FUNÇÃO AQUI:
+  setTyping: (status) => set({ isTyping: status }),
 
   setActiveContact: (contact) => set({ 
     activeContact: contact,
@@ -48,10 +53,8 @@ export const useChatStore = create<ChatState>((set, get) => ({
   }),
 
   sendMessage: (contactId, text) => {
-    // 1. TOCA O SOM DE ENVIO IMEDIATAMENTE
     playSentSound(); 
 
-    // Adiciona mensagem do visitante
     set((state) => {
       const newMessage: Message = {
         id: Date.now().toString(),
@@ -69,15 +72,12 @@ export const useChatStore = create<ChatState>((set, get) => ({
       };
     });
 
-    // Simula digitando...
+    // Mantive a lógica original, mas agora usando a action setTyping interna se precisar
     setTimeout(() => {
         set({ isTyping: true });
 
-        // Envia resposta automática
         setTimeout(() => {
             const state = get();
-            
-            // 2. TOCA O SOM DE RECEBIMENTO
             playReceivedSound();
 
             const automaticResponse: Message = {

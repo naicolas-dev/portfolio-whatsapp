@@ -2,44 +2,82 @@
 
 import { cn } from "@/lib/utils";
 import { Message } from "@/data/chatData";
-import { Check, CheckCheck } from "lucide-react";
-import { motion } from "framer-motion"; // Certifique-se de ter framer-motion instalado
+import { Check, CheckCheck, ArrowRight } from "lucide-react";
+import { motion, useMotionValue, useSpring } from "framer-motion";
+import { useRef } from "react";
 
 interface MessageBubbleProps {
   message: Message;
-  index: number; // Precisamos do index para o delay em cascata
+  index: number;
 }
 
 export default function MessageBubble({ message, index }: MessageBubbleProps) {
   const isVisitor = message.sender === 'visitor';
+  const isCTA = !!message.link; // Se tiver link, tratamos como Call to Action
+
+  // --- FÍSICA MAGNÉTICA (Magnetic Hover Effect) ---
+  const ref = useRef<HTMLDivElement>(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  // Configuração da mola (Spring) para o movimento do mouse ser suave
+  const mouseX = useSpring(x, { stiffness: 150, damping: 15 });
+  const mouseY = useSpring(y, { stiffness: 150, damping: 15 });
+
+  function handleMouseMove(event: React.MouseEvent<HTMLDivElement>) {
+    const rect = ref.current?.getBoundingClientRect();
+    if (rect) {
+      const width = rect.width;
+      const height = rect.height;
+      const mouseXVal = event.clientX - rect.left;
+      const mouseYVal = event.clientY - rect.top;
+      
+      // Move apenas 10px na direção do mouse para ser sutil
+      const xPct = (mouseXVal / width - 0.5) * 10; 
+      const yPct = (mouseYVal / height - 0.5) * 10;
+      
+      x.set(xPct);
+      y.set(yPct);
+    }
+  }
+
+  function handleMouseLeave() {
+    x.set(0);
+    y.set(0);
+  }
 
   return (
     <motion.div
-      // A Mágica do Motion:
+      ref={ref}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ x: mouseX, y: mouseY }}
+      // --- ANIMAÇÃO DE ENTRADA (Liquid Stagger) ---
       initial={{ opacity: 0, y: 20, scale: 0.95 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ 
-        duration: 0.4, 
-        delay: index * 0.08, // Cada mensagem espera um pouquinho mais que a anterior (efeito dominó)
-        ease: [0.25, 0.46, 0.45, 0.94], // Curva suave
-        type: "spring",
-        stiffness: 80,
-        damping: 15
+        type: "spring", 
+        stiffness: 90, 
+        damping: 12,
+        delay: index * 0.05 // Efeito dominó (stagger)
       }}
       className={cn(
-        "flex w-full mb-1 relative z-10 origin-bottom", // z-10 para ficar acima do spotlight
+        "flex w-full mb-1 relative z-10 origin-bottom group", 
         isVisitor ? "justify-end" : "justify-start"
       )}
     >
-      {/* ... (Mantenha o conteúdo interno do balão IDENTICO ao que já fizemos com o SVG e cores) ... */}
        <div className={cn(
-          "relative max-w-[85%] md:max-w-[60%] px-2 py-1.5 rounded-lg text-[14.2px] leading-[19px] shadow-sm",
+          "relative max-w-[85%] md:max-w-[60%] px-3 py-2 rounded-xl text-[14.2px] leading-[19px] shadow-sm transition-shadow duration-300",
+          // Destaque para Links (CTA)
+          isCTA ? "hover:shadow-md ring-2 ring-transparent hover:ring-wa-teal/20 cursor-pointer" : "",
+          
+          // Cores (Dark Mode Friendly)
           isVisitor 
             ? "bg-[#d9fdd3] dark:bg-[#005c4b] rounded-tr-none text-[#111b21] dark:text-[#e9edef]" 
             : "bg-white dark:bg-[#202c33] rounded-tl-none text-[#111b21] dark:text-[#e9edef]"     
         )}>
-            {/* SVG Tail */}
-             <span className={cn(
+            {/* SVG Tail (O "biquinho" perfeito) */}
+            <span className={cn(
                 "absolute top-0 w-[8px] h-[13px]",
                 isVisitor 
                     ? "-right-[8px] text-[#d9fdd3] dark:text-[#005c4b] fill-current" 
@@ -53,12 +91,26 @@ export default function MessageBubble({ message, index }: MessageBubbleProps) {
 
             <div className="pr-7 pb-1 whitespace-pre-wrap break-words">
               {message.text}
+              
+              {/* Renderização do Link (CTA) */}
+              {message.link && (
+                <a 
+                  href={message.link.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="mt-2 flex items-center gap-2 text-[#008069] dark:text-[#53bdeb] font-bold hover:underline"
+                >
+                   {message.link.label} <ArrowRight size={14} />
+                </a>
+              )}
             </div>
 
+            {/* Hora e Status */}
             <div className="absolute bottom-1 right-2 flex items-center gap-1 select-none">
               <span className="text-[11px] text-[rgba(17,27,33,0.5)] dark:text-[rgba(255,255,255,0.6)]">
                 {message.timestamp}
               </span>
+              
               {isVisitor && (
                 <div className={cn(
                     "text-[15px]",
